@@ -1,14 +1,14 @@
 ﻿using NUnit.Framework;
-using WebAPI.Controllers;
+using WebAPIFMacias.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Moq;
 using Microsoft.Extensions.Logging;
-using WebAPI.Models;
+using WebAPIFMacias.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers.Tests
+namespace WebAPIFMacias.Controllers.Tests
 {
     [TestFixture()]
     public class PersonsControllerTests

@@ -1,7 +1,7 @@
 using System;
-using WebAPI.Models;
+using WebAPIFMacias.Models;
 
-namespace WebAPI
+namespace WebAPIFMacias
 {
     public class Person
     {

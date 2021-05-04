@@ -1,4 +1,4 @@
-﻿using WebAPI.Models;
+﻿using WebAPIFMacias.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Models.Tests
+namespace WebAPIFMacias.Models.Tests
 {
     [TestFixture()]
     public class CSVPersonDataSourceTests

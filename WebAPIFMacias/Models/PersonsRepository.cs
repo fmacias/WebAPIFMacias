@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LumenWorks.Framework.IO.Csv;
-namespace WebAPI.Models
+namespace WebAPIFMacias.Models
 {
     public class PersonsRepository : IPersonsRepository
     {

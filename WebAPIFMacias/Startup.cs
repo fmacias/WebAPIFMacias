@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebAPI.Models;
+using WebAPIFMacias.Models;
 
-namespace WebAPI
+namespace WebAPIFMacias
 {
     public class Startup
     {

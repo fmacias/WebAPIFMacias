@@ -5,14 +5,14 @@ using System.IO;
 using LumenWorks.Framework.IO.Csv;
 using System.Text.RegularExpressions;
 
-namespace WebAPI.Models
+namespace WebAPIFMacias.Models
 {
     public class CSVPersonDataSourceAdapter : IPersonsDataSourceAdapter
     {
         const int SURNAME_COLUMN = 0;
-        const int NAME = 1;
-        const int ZIPCODE_CITY = 2;
-        const int COLOR = 3;
+        const int NAME_COLUMN = 1;
+        const int ZIPCODE_CITY_COLUMN = 2;
+        const int COLOR_COLUMN = 3;
 
         private readonly List<Person> _persons;
         public CSVPersonDataSourceAdapter(string CSVFileName)
@@ -71,7 +71,7 @@ namespace WebAPI.Models
         }
         private static void ExtractColor(CsvReader csvReader, Person person)
         {
-            Color color = (Color)Enum.Parse(typeof(Color), csvReader[COLOR].ToString());
+            Color color = (Color)Enum.Parse(typeof(Color), csvReader[COLOR_COLUMN].ToString());
 
             if (!Enum.IsDefined(typeof(Color), color))
                 person.Color = Color.Unbekannt;
@@ -82,7 +82,7 @@ namespace WebAPI.Models
         }
         private static void ExtractLocation(CsvReader csvReader, Person person)
         {
-            string zipcode_city = csvReader[ZIPCODE_CITY].ToString().Trim();
+            string zipcode_city = csvReader[ZIPCODE_CITY_COLUMN].ToString().Trim();
             Regex digitsAtTheBeginRegexAsZipCode = new Regex(@"\d*");
             Regex wordsAsCity = new Regex(@"([a-zA-Z]|\s)+");
             person.Zipcode = digitsAtTheBeginRegexAsZipCode.Match(zipcode_city).Value ?? "";
@@ -90,7 +90,7 @@ namespace WebAPI.Models
         }
         private static void ExtractName(CsvReader csvReader, Person person)
         {
-            person.Name = csvReader[NAME].ToString();
+            person.Name = csvReader[NAME_COLUMN].ToString();
         }
         #endregion
     }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using WebAPI.Models;
+using WebAPIFMacias.Models;
 
-namespace WebAPI.Controllers
+namespace WebAPIFMacias.Controllers
 {
     [ApiController]
     [Route("[controller]")]
