@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace WebAPI.Models
 {
-    public class CSVPersonDataSource : IPersonsDataSource
+    public class CSVPersonDataSourceAdapter : IPersonsDataSourceAdapter
     {
         const int SURNAME_COLUMN = 0;
         const int NAME = 1;
@@ -15,7 +15,7 @@ namespace WebAPI.Models
         const int COLOR = 3;
 
         private readonly List<Person> _persons;
-        public CSVPersonDataSource(string CSVFileName)
+        public CSVPersonDataSourceAdapter(string CSVFileName)
         {
             _persons = ExtractPersons(CSVFileName);
         }

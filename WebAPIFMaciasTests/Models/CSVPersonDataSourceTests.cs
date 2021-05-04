@@ -15,7 +15,7 @@ namespace WebAPI.Models.Tests
         [Test()]
         public void CSVPersonDataSourceTest()
         {
-            Assert.IsInstanceOf<IPersonsDataSource>(new CSVPersonDataSource("persons.csv"));
+            Assert.IsInstanceOf<IPersonsDataSourceAdapter>(new CSVPersonDataSourceAdapter("persons.csv"));
         }
         [Test()]
         public void regexTEst()
@@ -36,7 +36,7 @@ namespace WebAPI.Models.Tests
         [Test()]
         public void GetAllTest()
         {
-            CSVPersonDataSource personDataSource = new CSVPersonDataSource("persons.csv");
+            CSVPersonDataSourceAdapter personDataSource = new CSVPersonDataSourceAdapter("persons.csv");
             List<Person> persons = personDataSource.GetAll() as List<Person>;
             Assert.IsTrue(persons.Count == 10, "because rows 9 and 10 are not parseable!");
             Person firstPerson = persons[0];
@@ -52,7 +52,7 @@ namespace WebAPI.Models.Tests
         [Test()]
         public void GetPersonByIdTest()
         {
-            CSVPersonDataSource personDataSource = new CSVPersonDataSource("persons.csv");
+            CSVPersonDataSourceAdapter personDataSource = new CSVPersonDataSourceAdapter("persons.csv");
             Person person = personDataSource.GetPersonById(3);
             Assert.AreEqual(string.Format("{0} {1} {2} {3} {4} {5}", person.Id,
                 person.Name, person.Surname, person.Zipcode, person.City, person.Color),
@@ -62,7 +62,7 @@ namespace WebAPI.Models.Tests
         [Test()]
         public void GetPersonsByColorTest()
         {
-            CSVPersonDataSource personDataSource = new CSVPersonDataSource("persons.csv");
+            CSVPersonDataSourceAdapter personDataSource = new CSVPersonDataSourceAdapter("persons.csv");
             List<Person> persons = personDataSource.GetPersonsByColor((int)Color.Rot) as List<Person>;
             Assert.IsTrue(persons.Count == 2, "Two persons with red favorite color");
         }

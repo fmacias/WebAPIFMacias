@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public interface IPersonsDataSource
+    public interface IPersonsDataSourceAdapter
     {
         IEnumerable<Person> GetAll();
         Person GetPersonById(long id);

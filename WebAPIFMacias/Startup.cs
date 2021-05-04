@@ -21,12 +21,17 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            const string CSV_DATASOURCE_FILE_NAME = "persons.csv";
-            services.AddScoped<IPersonsDataSource>(serviceProvider => 
-                ActivatorUtilities.CreateInstance<CSVPersonDataSource>(serviceProvider, CSV_DATASOURCE_FILE_NAME)
-            );
-            services.AddScoped<IPersonsRepository,PersonsRepository>();
+            AssociateDataSourceAdapter(services);
+            services.AddScoped<IPersonsRepository, PersonsRepository>();
             services.AddControllers();
+        }
+
+        private static void AssociateDataSourceAdapter(IServiceCollection services)
+        {
+            const string CSV_DATASOURCE_FILE_NAME = "persons.csv";
+            services.AddScoped<IPersonsDataSourceAdapter>(serviceProvider =>
+                ActivatorUtilities.CreateInstance<CSVPersonDataSourceAdapter>(serviceProvider, CSV_DATASOURCE_FILE_NAME)
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

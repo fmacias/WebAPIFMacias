@@ -7,8 +7,8 @@ namespace WebAPI.Models
 {
     public class PersonsRepository : IPersonsRepository
     {
-        private readonly IPersonsDataSource _personDataSource;
-        public PersonsRepository(IPersonsDataSource personDataSource)
+        private readonly IPersonsDataSourceAdapter _personDataSource;
+        public PersonsRepository(IPersonsDataSourceAdapter personDataSource)
         {
             _personDataSource = personDataSource;
         }
