@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using WebAPI.Models;
 
@@ -18,20 +17,11 @@ namespace WebAPI.Controllers
             _logger = logger;
             _personsRepository = personsRepository;
         }
-        /// <summary>
-        /// GET /persons
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IEnumerable<Person> Get()
         {
             return _personsRepository.GetAll();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public Person GetPerson(long id)
         {
