@@ -58,7 +58,7 @@ namespace WebAPIFMacias.Models
         }
         public Person GetPersonById(long id)
         {
-            return _persons.FirstOrDefault(person => person.Id == id);
+            return _persons.FirstOrDefault(person => person.Id == id) ?? new Person(0);
         }
         public IEnumerable<Person> GetPersonsByColor(int color)
         {
