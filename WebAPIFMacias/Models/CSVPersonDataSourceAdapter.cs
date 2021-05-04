@@ -85,8 +85,8 @@ namespace WebAPIFMacias.Models
             string zipcode_city = csvReader[ZIPCODE_CITY_COLUMN].ToString().Trim();
             Regex digitsAtTheBeginRegexAsZipCode = new Regex(@"\d*");
             Regex wordsAsCity = new Regex(@"([a-zA-Z]|\s)+");
-            person.Zipcode = digitsAtTheBeginRegexAsZipCode.Match(zipcode_city).Value ?? "";
-            person.City = wordsAsCity.Match(zipcode_city).Value.Trim() ?? "";
+            person.Zipcode = digitsAtTheBeginRegexAsZipCode.Match(zipcode_city).Value;
+            person.City = wordsAsCity.Match(zipcode_city).Value.Trim();
         }
         private static void ExtractName(CsvReader csvReader, Person person)
         {
