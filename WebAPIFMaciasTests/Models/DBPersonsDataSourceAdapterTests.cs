@@ -10,7 +10,7 @@ namespace WebAPIFMacias.Models.Tests
     public class DBPersonsDataSourceAdapterTests
     {
         [Test()]
-        public void CreatePersonPersonHasNoAttributesTest()
+        public void InsertPersonsTest()
         {
             DbContextOptionsBuilder contextOptionsBuilder = new DbContextOptionsBuilder<PersonsContext>().UseInMemoryDatabase("Test");
             using (PersonsContext personsContext = new PersonsContext((DbContextOptions<PersonsContext>)contextOptionsBuilder.Options))
