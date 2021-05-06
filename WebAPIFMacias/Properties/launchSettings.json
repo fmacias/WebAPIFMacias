@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebAPI": {
+    "WebAPIFMacias": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "persons",
