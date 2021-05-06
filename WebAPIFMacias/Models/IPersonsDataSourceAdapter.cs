@@ -7,8 +7,9 @@ namespace WebAPIFMacias.Models
 {
     public interface IPersonsDataSourceAdapter
     {
-        IEnumerable<Person> GetAll();
-        Person GetPersonById(long id);
-        IEnumerable<Person> GetPersonsByColor(int color);
+        IEnumerable<Person> SelectAll();
+        Person SelectPersonById(long id);
+        IEnumerable<Person> SelectPersonsByColor(int color);
+        bool InsertPerson(Person person);
     }
 }

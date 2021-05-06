@@ -12,19 +12,25 @@ namespace WebAPIFMacias.Models
         {
             _personDataSourceAdapter = personDataSourceAdapter;
         }
+
+        public bool CreatePerson(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Person> GetAll()
         {
-            return _personDataSourceAdapter.GetAll();
+            return _personDataSourceAdapter.SelectAll();
         }
 
         public Person GetPerson(long id)
         {
-            return _personDataSourceAdapter.GetPersonById(id);
+            return _personDataSourceAdapter.SelectPersonById(id);
         }
 
         public IEnumerable<Person> GetPersonsByColor(int color)
         {
-            return _personDataSourceAdapter.GetPersonsByColor(color);
+            return _personDataSourceAdapter.SelectPersonsByColor(color);
         }
     }
 }

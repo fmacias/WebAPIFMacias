@@ -14,12 +14,14 @@ namespace WebAPIFMacias.Models
         const int ZIPCODE_CITY_COLUMN = 2;
         const int COLOR_COLUMN = 3;
 
-        private readonly List<Person> _persons;
+        private List<Person> _persons;
         private readonly ISympleFactory<Person> _personsFactory;
+        private readonly string _csvFileName;
         public CSVPersonDataSourceAdapter(string CSVFileName, ISympleFactory<Person> personFactory)
         {
             _persons = ExtractPersons(CSVFileName);
             _personsFactory = personFactory;
+            _csvFileName = CSVFileName;
         }
         private List<Person> ExtractPersons(string CSVFileName)
         {
@@ -52,18 +54,19 @@ namespace WebAPIFMacias.Models
                         }
                     }
                 }
+                reader.Close();
             }
             return persons;
         }
-        public IEnumerable<Person> GetAll()
+        public IEnumerable<Person> SelectAll()
         {
             return _persons;
         }
-        public Person GetPersonById(long id)
+        public Person SelectPersonById(long id)
         {
             return _persons.FirstOrDefault(person => person.Id == id) ?? _personsFactory.Create();
         }
-        public IEnumerable<Person> GetPersonsByColor(int color)
+        public IEnumerable<Person> SelectPersonsByColor(int color)
         {
             return _persons.FindAll(person => person.Color == (Color) color);
         }
@@ -80,8 +83,6 @@ namespace WebAPIFMacias.Models
                 person.Color = Color.Unbekannt;
             else
                 person.Color = color;
-
-            person.ColorName = Enum.GetName(typeof(Color), person.Color);
         }
         private static void ExtractLocation(CsvReader csvReader, Person person)
         {
@@ -94,6 +95,28 @@ namespace WebAPIFMacias.Models
         private static void ExtractName(CsvReader csvReader, Person person)
         {
             person.Name = csvReader[NAME_COLUMN].ToString();
+        }
+        
+        public bool InsertPerson(Person person)
+        {
+            bool result = false;
+            try
+            {
+                using (StreamWriter writer = File.AppendText(_csvFileName))
+                {
+                    writer.WriteLine("{0}{1},{2},{3} {4},{5}","\n", person.Surname, person.Name,
+                        person.Zipcode, person.City, (int) person.Color);
+                    writer.Flush();
+                    writer.Close();
+                }
+                _persons = ExtractPersons(_csvFileName);
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
         }
         #endregion
     }

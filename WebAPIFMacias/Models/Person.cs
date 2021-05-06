@@ -11,6 +11,7 @@ namespace WebAPIFMacias
         public string Zipcode { get; set; }
         public string City { get; set; }
         public Color Color { get; set; }
-        public string ColorName { get; set; }
+        public string ColorName => Enum.GetName(typeof(Color), Color);
     }
 }
+

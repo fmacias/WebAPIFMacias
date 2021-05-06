@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPIFMacias.Models.Tests
 {
     [TestFixture()]
-    public class CSVPersonDataSourceTests
+    public class CSVPersonDataSourceAdapterTests
     {
         [Test()]
         public void CSVPersonDataSourceTest()
@@ -37,7 +37,7 @@ namespace WebAPIFMacias.Models.Tests
         public void GetAllTest()
         {
             CSVPersonDataSourceAdapter personDataSource = new CSVPersonDataSourceAdapter("persons.csv", new PersonsFactory());
-            List<Person> persons = personDataSource.GetAll() as List<Person>;
+            List<Person> persons = personDataSource.SelectAll() as List<Person>;
             Assert.IsTrue(persons.Count == 10, "because rows 9 and 10 are not parseable!");
             Person firstPerson = persons[0];
             Person lastPerson = persons[9];
@@ -53,7 +53,7 @@ namespace WebAPIFMacias.Models.Tests
         public void GetPersonByIdTest()
         {
             CSVPersonDataSourceAdapter personDataSource = new CSVPersonDataSourceAdapter("persons.csv", new PersonsFactory());
-            Person person = personDataSource.GetPersonById(3);
+            Person person = personDataSource.SelectPersonById(3);
             Assert.AreEqual(string.Format("{0} {1} {2} {3} {4} {5}", person.Id,
                 person.Name, person.Surname, person.Zipcode, person.City, person.Color),
                 "3 Johnny Johnson 88888 made up Rot");
@@ -63,8 +63,25 @@ namespace WebAPIFMacias.Models.Tests
         public void GetPersonsByColorTest()
         {
             CSVPersonDataSourceAdapter personDataSource = new CSVPersonDataSourceAdapter("persons.csv", new PersonsFactory());
-            List<Person> persons = personDataSource.GetPersonsByColor((int)Color.Rot) as List<Person>;
+            List<Person> persons = personDataSource.SelectPersonsByColor((int)Color.Rot) as List<Person>;
             Assert.IsTrue(persons.Count == 2, "Two persons with red favorite color");
+        }
+        [Test()]
+        public void InsertPersonTest()
+        {
+            CSVPersonDataSourceAdapter personDataSourceAdapter = new CSVPersonDataSourceAdapter("persons.csv", new PersonsFactory());
+            personDataSourceAdapter.InsertPerson(new Person()
+            {
+                City = "City",
+                Color = Color.Gelb,
+                Name = "Name",
+                Surname = "Surname",
+                Zipcode = "12049"
+            });
+            Person person = personDataSourceAdapter.SelectPersonById(10);
+            Assert.AreEqual(string.Format("{0} {1} {2} {3} {4} {5}", person.Id,
+                person.Name, person.Surname, person.Zipcode, person.City, person.Color),
+                "10 Name Surname 12049 City Gelb");
         }
     }
 }

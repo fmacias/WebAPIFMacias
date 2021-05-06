@@ -10,5 +10,6 @@ namespace WebAPIFMacias.Models
         IEnumerable<Person> GetAll();
         Person GetPerson(long id);
         IEnumerable<Person> GetPersonsByColor(int color);
+        bool CreatePerson(Person person);
     }
 }
