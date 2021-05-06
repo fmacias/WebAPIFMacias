@@ -15,9 +15,11 @@ namespace WebAPIFMacias.Models
         const int COLOR_COLUMN = 3;
 
         private readonly List<Person> _persons;
-        public CSVPersonDataSourceAdapter(string CSVFileName)
+        private readonly ISympleFactory<Person> _personsFactory;
+        public CSVPersonDataSourceAdapter(string CSVFileName, ISympleFactory<Person> personFactory)
         {
             _persons = ExtractPersons(CSVFileName);
+            _personsFactory = personFactory;
         }
         private List<Person> ExtractPersons(string CSVFileName)
         {
@@ -29,7 +31,7 @@ namespace WebAPIFMacias.Models
                 {
                     while (csvReader.ReadNextRecord())
                     {
-                        Person person = new Person(personId);
+                        Person person = new Person();
                         bool errorAtCSVRow = false;
                         try
                         {
@@ -44,6 +46,7 @@ namespace WebAPIFMacias.Models
                         }
                         if (!errorAtCSVRow)
                         {
+                            person.Id = personId;
                             persons.Add(person);
                             personId++;
                         }
@@ -58,7 +61,7 @@ namespace WebAPIFMacias.Models
         }
         public Person GetPersonById(long id)
         {
-            return _persons.FirstOrDefault(person => person.Id == id) ?? new Person(0);
+            return _persons.FirstOrDefault(person => person.Id == id) ?? _personsFactory.Create();
         }
         public IEnumerable<Person> GetPersonsByColor(int color)
         {

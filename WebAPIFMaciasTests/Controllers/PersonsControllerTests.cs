@@ -37,7 +37,7 @@ namespace WebAPIFMacias.Controllers.Tests
         {
             Mock<ILogger<PersonsController>> mockLogger = new Mock<ILogger<PersonsController>>();
             Mock<IPersonsRepository> mockPersonsRepository = new Mock<IPersonsRepository>();
-            mockPersonsRepository.Setup(o => o.GetPerson(0)).Returns(new Person(0));
+            mockPersonsRepository.Setup(o => o.GetPerson(0)).Returns(new Person());
             PersonsController controller = new PersonsController(mockLogger.Object, mockPersonsRepository.Object);
             Assert.IsInstanceOf<Person>(controller.GetPerson(0));
         }

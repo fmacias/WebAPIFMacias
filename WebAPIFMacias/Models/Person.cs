@@ -5,12 +5,7 @@ namespace WebAPIFMacias
 {
     public class Person
     {
-        private readonly long _id;
-        public Person(long id)
-        {
-            _id = id;
-        }
-        public long Id => _id;
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Zipcode { get; set; }

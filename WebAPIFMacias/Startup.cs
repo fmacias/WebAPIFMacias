@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using WebAPIFMacias.Models;
 
 namespace WebAPIFMacias
@@ -22,15 +23,18 @@ namespace WebAPIFMacias
         public void ConfigureServices(IServiceCollection services)
         {
             AssociateDataSourceAdapter(services);
+            services.AddScoped<ISympleFactory<Person>, PersonsFactory>();
             services.AddScoped<IPersonsRepository, PersonsRepository>();
             services.AddControllers();
         }
 
         private static void AssociateDataSourceAdapter(IServiceCollection services)
         {
-            const string CSV_DATASOURCE_FILE_NAME = "persons.csv";
+            services.AddDbContext<PersonsContext>(opt =>
+                opt.UseInMemoryDatabase("Persons")
+            );
             services.AddScoped<IPersonsDataSourceAdapter>(serviceProvider =>
-                ActivatorUtilities.CreateInstance<CSVPersonDataSourceAdapter>(serviceProvider, CSV_DATASOURCE_FILE_NAME)
+                ActivatorUtilities.CreateInstance<DBPersonsDataSourceAdapter>(serviceProvider)
             );
         }
 
