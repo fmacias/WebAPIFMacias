@@ -104,7 +104,7 @@ namespace WebAPIFMacias.Models
             {
                 using (StreamWriter writer = File.AppendText(_csvFileName))
                 {
-                    writer.WriteLine("{0}{1},{2},{3} {4},{5}","\n", person.Surname, person.Name,
+                    writer.WriteLine("{0}{1},{2},{3} {4},{5}", writer.NewLine, person.Surname, person.Name,
                         person.Zipcode, person.City, (int) person.Color);
                     writer.Flush();
                     writer.Close();
