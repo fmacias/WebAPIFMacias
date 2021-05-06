@@ -15,7 +15,7 @@ namespace WebAPIFMacias.Models
 
         public bool CreatePerson(Person person)
         {
-            throw new NotImplementedException();
+            return _personDataSourceAdapter.InsertPerson(person);
         }
 
         public IEnumerable<Person> GetAll()
