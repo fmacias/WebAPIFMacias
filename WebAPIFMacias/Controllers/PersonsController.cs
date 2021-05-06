@@ -32,8 +32,8 @@ namespace WebAPIFMacias.Controllers
         {
             return _personsRepository.GetPersonsByColor(color);
         }
-        [HttpPost("create/Person")]
-        public string CreatePerson(Person person)
+        [HttpPost]
+        public string Create(Person person)
         {
             return _personsRepository.CreatePerson(person) ? "Person Created" : "Person Not Created";
         }
